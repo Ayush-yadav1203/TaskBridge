@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Bridge - Tasks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #1976d2;
+            color: #fff;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+        main {
+            max-width: 700px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 2rem;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        .task-list {
+            list-style: none;
+            padding: 0;
+        }
+        .task-list li {
+            background: #e3f2fd;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .add-task {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .add-task input {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #bdbdbd;
+        }
+        .add-task button {
+            padding: 0.5rem 1rem;
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .add-task button:hover {
+            background: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Task Bridge</h1>
+        <p>Your Tasks</p>
+    </header>
+    <main>
+        <h2>Task List</h2>
+        <form class="add-task" id="taskForm">
+            <input type="text" id="taskInput" placeholder="Enter a new task..." required>
+            <button type="submit">Add Task</button>
+        </form>
+        <ul class="task-list" id="taskList">
+            <!-- Tasks will appear here -->
+        </ul>
+    </main>
+    <script>
+        const taskForm = document.getElementById('taskForm');
+        const taskInput = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
+
+        taskForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const taskText = taskInput.value.trim();
+            if (taskText) {
+                const li = document.createElement('li');
+                li.textContent = taskText;
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.style.background = '#d32f2f';
+                removeBtn.style.color = '#fff';
+                removeBtn.style.border = 'none';
+                removeBtn.style.borderRadius = '4px';
+                removeBtn.style.padding = '0.3rem 0.7rem';
+                removeBtn.style.cursor = 'pointer';
+                removeBtn.onclick = () => li.remove();
+                li.appendChild(removeBtn);
+                taskList.appendChild(li);
+                taskInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
